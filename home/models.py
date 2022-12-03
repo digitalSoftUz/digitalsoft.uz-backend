@@ -12,6 +12,7 @@ class MainTitle(models.Model):
 class MainAboutUsTitle(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
+    video = models.FileField(upload_to='aboutus/', null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -35,8 +36,9 @@ class MainAboutUsStatistic(models.Model):
         return self.title
 
 class MainOurServiceText(models.Model):
+    title = models.CharField(max_length=255)
     text = models.TextField()
-    text = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.text[:55]
@@ -45,6 +47,7 @@ class Service(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
     icon = models.ImageField(upload_to='service/')
+    icon_style = models.TextField(null=True, blank=True)
     is_show_main = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
@@ -111,6 +114,7 @@ class Partner(models.Model):
     def __str__(self):
         return self.name
 
+
 class PartnerFeedbackTitle(models.Model):
     title = models.CharField(max_length = 255)
     text = models.TextField()
@@ -128,6 +132,90 @@ class PartnerFeedback(models.Model):
 
     def __str__(self):
         return self.partner_name
+
+class ClientMessage(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length = 255)
+    email = models.CharField(max_length=255, null=True, blank=True)
+    phone = models.CharField(max_length=50)
+    text = models.TextField(null=True, blank=True)
+    file = models.FileField(upload_to='message/', null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.first_name} : {self.date}"
+
+class ContactInfo(models.Model):
+    address = models.CharField(max_length=255)
+    facebook = models.CharField(max_length=255)
+    instagram = models.CharField(max_length=255)
+    telegram = models.CharField(max_length=255)
+    tweeter = models.CharField(max_length=255)
+    linkedin = models.CharField(max_length=255)
+    youtube = models.CharField(max_length=255)
+    phone1 = models.CharField(max_length=50)
+    phone2 = models.CharField(max_length=50)
+    email = models.CharField(max_length=255)
+    is_active = models.BooleanField(default=True)
+
+
+class Team(models.Model):
+    name = models.CharField(max_length = 255)
+    title = models.CharField(max_length = 200)
+    technalogies = models.ManyToManyField(Technology)
+    image = models.ImageField(upload_to="team/")
+    order = models.IntegerField(default=99)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+class IndustryTitle(models.Model):
+    title = models.CharField(max_length = 255)
+    text = models.TextField()
+    
+    def __str__(self):
+        return self.title
+
+class Industry(models.Model):
+    title = models.CharField(max_length=255)
+    text = models.TextField(max_length=500)
+    icon = models.ImageField(upload_to='service/')
+    icon_style = models.TextField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+
+    
+class Vacancy(models.Model):
+    title = models.CharField(max_length=255)
+    text = models.TextField()
+    short_title = models.CharField(max_length=50)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+
+class Resume(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length = 255)
+    email = models.CharField(max_length=255, null=True, blank=True)
+    phone = models.CharField(max_length=50)
+    text = models.TextField(null=True, blank=True)
+    file = models.FileField(upload_to='resume/', null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.first_name} : {self.date}"
+
+    
+    
+    
+    
 
 
 
