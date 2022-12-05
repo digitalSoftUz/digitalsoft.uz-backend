@@ -76,33 +76,38 @@ class PartnerSerializer(serializers.ModelSerializer):
 
 class PartnerFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Partner
+        model = PartnerFeedback
         fields = ['partner_name', 'partner_bio', 'partner_image', 'feedback']
+
+class PartnerFeedbackTitleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnerFeedbackTitle
+        fields = ['title', 'text']
 
 class ContactInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Partner
+        model = ContactInfo
         fields = ['address', 'facebook', 'instagram', 'telegram', 'tweeter', 'linkedin','youtube','phone1','phone2','email']
 
 class TeamSerializer(serializers.ModelSerializer):
     technologies = TechnologySerializer()
     class Meta:
-        model = Partner
+        model = Team
         fields = ['name', 'title', 'technalogies', 'image', 'order']
 
 class IndustryTitleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Partner
+        model = IndustryTitle
         fields = ['title', 'text']
 
 class IndustrySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Partner
+        model = Industry
         fields = ['title', 'text', 'icon', 'icon_style']
 
 class VacancySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Partner
+        model = Vacancy
         fields = ['title', 'text', 'short_title']
 
 

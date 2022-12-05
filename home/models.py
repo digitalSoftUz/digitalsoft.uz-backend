@@ -48,6 +48,7 @@ class Service(models.Model):
     text = models.TextField()
     icon = models.ImageField(upload_to='service/')
     icon_style = models.TextField(null=True, blank=True)
+    order = models.IntegerField(default=99)
     is_show_main = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
@@ -64,6 +65,7 @@ class Technology(models.Model):
 class MainTechnologyCard(models.Model):
     title = models.CharField(max_length=255)
     technologies = models.ManyToManyField(Technology)
+    order = models.IntegerField(default=99)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -81,6 +83,7 @@ class PortifolioCategory(models.Model):
 class PortifolioImage(models.Model):
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to='portifolio/')
+    
     is_active = models.BooleanField(default=True)
     def __str__(self):
         return self.title
@@ -99,6 +102,7 @@ class Portifolio(models.Model):
     images = models.ManyToManyField(PortifolioImage)
     video = models.FileField(upload_to='portifolio/', null=True, blank=True)
     link = models.CharField(max_length=255, null=True, blank=True)
+    order = models.IntegerField(default=99)
     is_show_main = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
 
@@ -118,6 +122,7 @@ class Partner(models.Model):
 class PartnerFeedbackTitle(models.Model):
     title = models.CharField(max_length = 255)
     text = models.TextField()
+    is_active = models.BooleanField(default=True)
     
     def __str__(self):
         return self.title
@@ -128,6 +133,7 @@ class PartnerFeedback(models.Model):
     partner_bio = models.CharField(max_length=255)
     partner_image = models.ImageField(upload_to='feadback/')
     feedback = models.TextField()
+    order = models.IntegerField(default=99)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
