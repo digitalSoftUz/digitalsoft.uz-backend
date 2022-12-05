@@ -2,12 +2,14 @@ from django.db import models
 
 # Create your models here.
 
+
 class MainTitle(models.Model):
     title = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
+
 
 class MainAboutUsTitle(models.Model):
     title = models.CharField(max_length=255)
@@ -18,13 +20,15 @@ class MainAboutUsTitle(models.Model):
     def __str__(self):
         return self.title
 
+
 class MainAboutUsImage(models.Model):
     title = models.CharField(max_length=255)
-    image=models.ImageField(upload_to='about_image/', null=True, blank=True)
+    image = models.ImageField(upload_to='about_image/', null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
+
 
 class MainAboutUsStatistic(models.Model):
     title = models.CharField(max_length=255)
@@ -35,6 +39,7 @@ class MainAboutUsStatistic(models.Model):
     def __str__(self):
         return self.title
 
+
 class MainOurServiceText(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
@@ -42,6 +47,7 @@ class MainOurServiceText(models.Model):
 
     def __str__(self):
         return self.text[:55]
+
 
 class Service(models.Model):
     title = models.CharField(max_length=255)
@@ -55,12 +61,14 @@ class Service(models.Model):
     def __str__(self):
         return self.title
 
+
 class Technology(models.Model):
     title = models.CharField(max_length=255)
     icon = models.ImageField(upload_to='technology/')
 
     def __str__(self):
         return self.title
+
 
 class MainTechnologyCard(models.Model):
     title = models.CharField(max_length=255)
@@ -75,16 +83,17 @@ class MainTechnologyCard(models.Model):
 class PortifolioCategory(models.Model):
     title = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
+
     def __str__(self):
         return self.title
-
 
 
 class PortifolioImage(models.Model):
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to='portifolio/')
-    
+
     is_active = models.BooleanField(default=True)
+
     def __str__(self):
         return self.title
 
@@ -98,7 +107,7 @@ class Portifolio(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     category = models.ForeignKey(PortifolioCategory, on_delete=models.CASCADE)
-    type = models.SmallIntegerField(default=1, choices= TYPE)
+    type = models.SmallIntegerField(default=1, choices=TYPE)
     images = models.ManyToManyField(PortifolioImage)
     video = models.FileField(upload_to='portifolio/', null=True, blank=True)
     link = models.CharField(max_length=255, null=True, blank=True)
@@ -108,6 +117,7 @@ class Portifolio(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Partner(models.Model):
     name = models.CharField(max_length=255)
@@ -120,10 +130,10 @@ class Partner(models.Model):
 
 
 class PartnerFeedbackTitle(models.Model):
-    title = models.CharField(max_length = 255)
+    title = models.CharField(max_length=255)
     text = models.TextField()
     is_active = models.BooleanField(default=True)
-    
+
     def __str__(self):
         return self.title
 
@@ -139,9 +149,11 @@ class PartnerFeedback(models.Model):
     def __str__(self):
         return self.partner_name
 
+
 class ClientMessage(models.Model):
     first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length = 255)
+    last_name = models.CharField(max_length=255)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
     email = models.CharField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=50)
     text = models.TextField(null=True, blank=True)
@@ -150,6 +162,7 @@ class ClientMessage(models.Model):
 
     def __str__(self):
         return f"{self.first_name} : {self.date}"
+
 
 class ContactInfo(models.Model):
     address = models.CharField(max_length=255)
@@ -166,8 +179,8 @@ class ContactInfo(models.Model):
 
 
 class Team(models.Model):
-    name = models.CharField(max_length = 255)
-    title = models.CharField(max_length = 200)
+    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=200)
     technalogies = models.ManyToManyField(Technology)
     image = models.ImageField(upload_to="team/")
     order = models.IntegerField(default=99)
@@ -178,11 +191,13 @@ class Team(models.Model):
 
 
 class IndustryTitle(models.Model):
-    title = models.CharField(max_length = 255)
+    title = models.CharField(max_length=255)
     text = models.TextField()
-    
+    is_active = models.BooleanField(default=True)
+
     def __str__(self):
         return self.title
+
 
 class Industry(models.Model):
     title = models.CharField(max_length=255)
@@ -195,11 +210,11 @@ class Industry(models.Model):
         return self.title
 
 
-    
 class Vacancy(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
     short_title = models.CharField(max_length=50)
+    order = models.IntegerField(default=99)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -208,7 +223,7 @@ class Vacancy(models.Model):
 
 class Resume(models.Model):
     first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length = 255)
+    last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=50)
     text = models.TextField(null=True, blank=True)
@@ -218,15 +233,18 @@ class Resume(models.Model):
     def __str__(self):
         return f"{self.first_name} : {self.date}"
 
-    
-    
-    
-    
 
+class FormContent(models.Model):
+    title = models.CharField(max_length=255)
+    subtitle1 = models.CharField(max_length=255)
+    text1 = models.TextField(null=True, blank=True)
+    subtitle2 = models.CharField(max_length=255)
+    text2 = models.TextField(null=True, blank=True)
+    hide_second_part = models.BooleanField(default=False)
+    type = models.CharField(max_length=50, choices=(
+        ('Project', 'Project'), ('Resume', 'Resume')
+    ))
+    is_active = models.BooleanField(default=True)
 
-
-    
-
-
-    
-    
+    def __str__(self):
+        return self.title
