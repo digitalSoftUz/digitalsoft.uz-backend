@@ -52,7 +52,7 @@ class MainOurServiceText(models.Model):
 class Service(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
-    icon = models.ImageField(upload_to='service/')
+    icon = models.TextField()
     icon_style = models.TextField(null=True, blank=True)
     order = models.IntegerField(default=99)
     is_show_main = models.BooleanField(default=False)
