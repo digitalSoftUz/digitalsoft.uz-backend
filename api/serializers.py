@@ -35,67 +35,68 @@ class MainAboutUsStatisticSerializer(serializers.ModelSerializer):
 class MainOurServiceTextSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainOurServiceText
-        fields = ['title', 'text']
+        fields = ['id', 'title', 'text']
 
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
-        fields = ['title', 'text', 'icon', 'icon_style']
+        fields = ['id', 'title', 'text', 'icon', 'icon_style']
 
 
 class ServiceForFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class TechnologySerializer(serializers.ModelSerializer):
     class Meta:
         model = Technology
-        fields = ['title', 'icon']
+        fields = ['id', 'title', 'icon']
 
 
 class MainTechnologyCardSerializer(serializers.ModelSerializer):
-    technologies = TechnologySerializer()
+    technologies = TechnologySerializer(many=True)
 
     class Meta:
         model = MainTechnologyCard
-        fields = ['title', 'technologies']
+        fields = ['id', 'title', 'technologies']
 
 
 class PortifolioCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = PortifolioCategory
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class PortifolioImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortifolioImage
-        fields = ['title', 'image']
+        fields = ['id', 'title', 'image']
 
 
 class PortifolioSerializer(serializers.ModelSerializer):
     category = PortifolioCategorySerializer()
-    images = PortifolioImageSerializer()
+    images = PortifolioImageSerializer(many=True)
 
     class Meta:
         model = Portifolio
-        fields = ['title', 'images', 'description',
+        fields = ['id', 'title', 'images', 'description',
                   'category', 'type', 'video', 'link']
 
 
 class PartnerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Partner
-        fields = ['name', 'logo', 'website']
+        fields = ['id', 'name', 'logo', 'website']
 
 
 class PartnerFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnerFeedback
-        fields = ['partner_name', 'partner_bio', 'partner_image', 'feedback']
+        fields = ['id', 'partner_name', 'partner_bio',
+                  'partner_image', 'feedback']
 
 
 class PartnerFeedbackTitleSerializer(serializers.ModelSerializer):
@@ -112,35 +113,35 @@ class ContactInfoSerializer(serializers.ModelSerializer):
 
 
 class TeamSerializer(serializers.ModelSerializer):
-    technologies = TechnologySerializer()
+    technalogies = TechnologySerializer(many=True)
 
     class Meta:
         model = Team
-        fields = ['name', 'title', 'technalogies', 'image', 'order']
+        fields = ['id', 'name', 'title', 'technalogies', 'image', 'order']
 
 
 class IndustryTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = IndustryTitle
-        fields = ['title', 'text']
+        fields = ['id', 'title', 'text']
 
 
 class IndustrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Industry
-        fields = ['title', 'text', 'icon', 'icon_style']
+        fields = ['id', 'title', 'text', 'icon', 'icon_style']
 
 
 class VacancySerializer(serializers.ModelSerializer):
     class Meta:
         model = Vacancy
-        fields = ['title', 'text', 'short_title']
+        fields = ['id', 'title', 'text', 'short_title']
 
 
 class FormContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = FormContent
-        fields = ['title', 'subtitle1', 'text1', 'subtitle2',
+        fields = ['id', 'title', 'subtitle1', 'text1', 'subtitle2',
                   'text2', 'hide_second_part', 'type', 'is_active']
 
 

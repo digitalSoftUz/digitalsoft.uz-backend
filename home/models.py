@@ -152,7 +152,7 @@ class PartnerFeedback(models.Model):
 
 class ClientMessage(models.Model):
     first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    company = models.CharField(max_length=255)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     email = models.CharField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=50)

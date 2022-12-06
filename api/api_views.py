@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
+from .pagination import pagination_json
 
 
 @api_view(['GET'])
@@ -70,6 +71,7 @@ def portifolioView(request):
     try:
         category = request.GET.get('category', 0)
         count = int(request.GET.get('count', 7))
+        page = request.GET.get('page')
         if int(category) == 0:
             portifolio = Portifolio.objects.filter(
                 is_active=True, is_show_main=True).order_by('order')[:count]
@@ -78,7 +80,7 @@ def portifolioView(request):
                 is_active=True, is_show_main=True, category_id=category).order_by('order')[:count]
         data = {
             "success": True,
-            "data": PortifolioSerializer(portifolio, many=True).data
+            "data": pagination_json(page, portifolio, PortifolioSerializer, count)
         }
         return Response(data)
     except Exception as err:
@@ -207,7 +209,7 @@ def postClientMessageView(request):
             ser.save()
             return Response({"success": True})
         else:
-            return Response({"success": False})
+            return Response({"success": False, 'error': f"{ser.error_messages}"})
     except Exception as err:
         return Response({
             "success": False,
@@ -224,7 +226,7 @@ def postResumeView(request):
             ser.save()
             return Response({"success": True})
         else:
-            return Response({"success": False})
+            return Response({"success": False, 'error': f"{ser.error_messages}"})
     except Exception as err:
         return Response({
             "success": False,
