@@ -4,21 +4,27 @@ from django.db import models
 
 
 class MainTitle(models.Model):
-    title = models.CharField(max_length=255)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class MainAboutUsTitle(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField()
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    text_uz = models.TextField()
+    text_ru = models.TextField(null=True, blank=True)
+    text_en = models.TextField(null=True, blank=True)
     video = models.FileField(upload_to='aboutus/', null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class MainAboutUsImage(models.Model):
@@ -27,31 +33,43 @@ class MainAboutUsImage(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class MainAboutUsStatistic(models.Model):
-    title = models.CharField(max_length=255)
-    subtitle = models.CharField(max_length=255)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    subtitle_uz = models.CharField(max_length=255)
+    subtitle_ru = models.CharField(max_length=255, null=True, blank=True)
+    subtitle_en = models.CharField(max_length=255, null=True, blank=True)
     icon = models.ImageField(upload_to='about_image/')
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class MainOurServiceText(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField()
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    text_uz = models.TextField()
+    text_ru = models.TextField(null=True, blank=True)
+    text_en = models.TextField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.text[:55]
+        return self.text_uz[:55]
 
 
 class Service(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField()
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    text_uz = models.TextField()
+    text_ru = models.TextField(null=True, blank=True)
+    text_en = models.TextField(null=True, blank=True)
     icon = models.TextField()
     icon_style = models.TextField(null=True, blank=True)
     order = models.IntegerField(default=99)
@@ -59,7 +77,7 @@ class Service(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class Technology(models.Model):
@@ -67,25 +85,29 @@ class Technology(models.Model):
     icon = models.ImageField(upload_to='technology/')
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class MainTechnologyCard(models.Model):
-    title = models.CharField(max_length=255)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
     technologies = models.ManyToManyField(Technology)
     order = models.IntegerField(default=99)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class PortifolioCategory(models.Model):
-    title = models.CharField(max_length=255)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class PortifolioImage(models.Model):
@@ -95,7 +117,7 @@ class PortifolioImage(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class Portifolio(models.Model):
@@ -104,8 +126,12 @@ class Portifolio(models.Model):
         (2, 'video'),
         (3, 'Slider'),
     )
-    title = models.CharField(max_length=255)
-    description = models.TextField(null=True, blank=True)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    description_uz = models.TextField(null=True, blank=True)
+    description_ru = models.TextField(null=True, blank=True)
+    description_en = models.TextField(null=True, blank=True)
     category = models.ForeignKey(PortifolioCategory, on_delete=models.CASCADE)
     type = models.SmallIntegerField(default=1, choices=TYPE)
     images = models.ManyToManyField(PortifolioImage)
@@ -116,38 +142,50 @@ class Portifolio(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class Partner(models.Model):
-    name = models.CharField(max_length=255)
+    name_uz = models.CharField(max_length=255)
+    name_ru = models.CharField(max_length=255, null=True, blank=True)
+    name_en = models.CharField(max_length=255, blank=True, null=True)
     logo = models.ImageField(upload_to='partner/', null=True, blank=True)
     website = models.CharField(max_length=255, null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return self.name_uz
 
 
 class PartnerFeedbackTitle(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField()
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    text_uz = models.TextField()
+    text_ru = models.TextField(null=True, blank=True)
+    text_en = models.TextField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class PartnerFeedback(models.Model):
-    partner_name = models.CharField(max_length=255)
-    partner_bio = models.CharField(max_length=255)
+    partner_name_uz = models.CharField(max_length=255)
+    partner_name_ru = models.CharField(max_length=255, null=True, blank=True)
+    partner_name_en = models.CharField(max_length=255, null=True, blank=True)
+    partner_bio_uz = models.CharField(max_length=255)
+    partner_bio_ru = models.CharField(max_length=255, null=True, blank=True)
+    partner_bio_en = models.CharField(max_length=255, null=True, blank=True)
     partner_image = models.ImageField(upload_to='feadback/')
-    feedback = models.TextField()
+    feedback_uz = models.TextField()
+    feedback_ru = models.TextField(null=True, blank=True)
+    feedback_en = models.TextField(null=True, blank=True)
     order = models.IntegerField(default=99)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.partner_name
+        return self.partner_name_uz
 
 
 class ClientMessage(models.Model):
@@ -165,7 +203,9 @@ class ClientMessage(models.Model):
 
 
 class ContactInfo(models.Model):
-    address = models.CharField(max_length=255)
+    address_uz = models.CharField(max_length=255)
+    address_ru = models.CharField(max_length=255, null=True, blank=True)
+    address_en = models.CharField(max_length=255, null=True, blank=True)
     facebook = models.CharField(max_length=255)
     instagram = models.CharField(max_length=255)
     telegram = models.CharField(max_length=255)
@@ -179,46 +219,64 @@ class ContactInfo(models.Model):
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=255)
-    title = models.CharField(max_length=200)
+    name_uz = models.CharField(max_length=255)
+    name_ru = models.CharField(max_length=255, null=True, blank=True)
+    name_en = models.CharField(max_length=255, blank=True, null=True)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
     technalogies = models.ManyToManyField(Technology)
     image = models.ImageField(upload_to="team/")
     order = models.IntegerField(default=99)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return self.name_uz
 
 
 class IndustryTitle(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField()
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    text_uz = models.TextField()
+    text_ru = models.TextField(null=True, blank=True)
+    text_en = models.TextField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class Industry(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField(max_length=500)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    text_uz = models.TextField()
+    text_ru = models.TextField(null=True, blank=True)
+    text_en = models.TextField(null=True, blank=True)
     icon = models.ImageField(upload_to='service/')
     icon_style = models.TextField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class Vacancy(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField()
-    short_title = models.CharField(max_length=50)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    text_uz = models.TextField()
+    text_ru = models.TextField(null=True, blank=True)
+    text_en = models.TextField(null=True, blank=True)
+    short_title_uz = models.CharField(max_length=50)
+    short_title_ru = models.CharField(max_length=50, null=True, blank=True)
+    short_title_en = models.CharField(max_length=50, null=True, blank=True)
     order = models.IntegerField(default=99)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
 
 
 class Resume(models.Model):
@@ -235,11 +293,21 @@ class Resume(models.Model):
 
 
 class FormContent(models.Model):
-    title = models.CharField(max_length=255)
-    subtitle1 = models.CharField(max_length=255)
-    text1 = models.TextField(null=True, blank=True)
-    subtitle2 = models.CharField(max_length=255)
-    text2 = models.TextField(null=True, blank=True)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255, null=True, blank=True)
+    title_en = models.CharField(max_length=255, null=True, blank=True)
+    subtitle1_uz = models.CharField(max_length=255)
+    subtitle1_ru = models.CharField(max_length=255, null=True, blank=True)
+    subtitle1_en = models.CharField(max_length=255, null=True, blank=True)
+    text1_uz = models.TextField()
+    text1_ru = models.TextField(null=True, blank=True)
+    text1_en = models.TextField(null=True, blank=True)
+    subtitle2_uz = models.CharField(max_length=255)
+    subtitle2_ru = models.CharField(max_length=255, null=True, blank=True)
+    subtitle2_en = models.CharField(max_length=255, null=True, blank=True)
+    text2_uz = models.TextField()
+    text2_ru = models.TextField(null=True, blank=True)
+    text2_en = models.TextField(null=True, blank=True)
     hide_second_part = models.BooleanField(default=False)
     type = models.CharField(max_length=50, choices=(
         ('Project', 'Project'), ('Resume', 'Resume')
@@ -247,4 +315,5 @@ class FormContent(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.title_uz
+ 
