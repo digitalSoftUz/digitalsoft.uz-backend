@@ -106,13 +106,19 @@ def portifolioView(request, lng):
     try:
         category = request.GET.get('category', 0)
         count = int(request.GET.get('count', 7))
+        is_show_main = request.GET.get('is_show_main')
         page = request.GET.get('page')
         if int(category) == 0:
             portifolio = Portifolio.objects.filter(
-                is_active=True, is_show_main=True).order_by('order')[:count]
+                is_active=True).order_by('order')
         else:
             portifolio = Portifolio.objects.filter(
-                is_active=True, is_show_main=True, category_id=category).order_by('order')[:count]
+                is_active=True, category_id=category).order_by('order')
+        
+        if is_show_main is not None:
+            portifolio = portifolio.filter(is_show_main=is_show_main)
+        
+        portifolio = portifolio[:count]
 
         if lng == 'ru':
             res = pagination_json(

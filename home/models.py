@@ -33,7 +33,7 @@ class MainAboutUsImage(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title_uz
+        return self.title
 
 
 class MainAboutUsStatistic(models.Model):
@@ -85,7 +85,7 @@ class Technology(models.Model):
     icon = models.ImageField(upload_to='technology/')
 
     def __str__(self):
-        return self.title_uz
+        return self.title
 
 
 class MainTechnologyCard(models.Model):
