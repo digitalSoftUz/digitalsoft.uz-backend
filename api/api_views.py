@@ -116,9 +116,7 @@ def portifolioView(request, lng):
                 is_active=True, category_id=category).order_by('order')
         
         if is_show_main is not None:
-            portifolio = portifolio.filter(is_show_main=is_show_main)
-        
-        portifolio = portifolio[:count]
+            portifolio = portifolio.filter(is_show_main=True)
 
         if lng == 'ru':
             res = pagination_json(
