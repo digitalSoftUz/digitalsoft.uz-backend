@@ -218,6 +218,17 @@ class ContactInfo(models.Model):
     is_active = models.BooleanField(default=True)
 
 
+class TeamCategory(models.Model):
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255)
+    title_en = models.CharField(max_length=255)
+    order = models.IntegerField(default=99)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title_uz
+
+
 class Team(models.Model):
     name_uz = models.CharField(max_length=255)
     name_ru = models.CharField(max_length=255, null=True, blank=True)
@@ -225,6 +236,8 @@ class Team(models.Model):
     title_uz = models.CharField(max_length=255)
     title_ru = models.CharField(max_length=255, null=True, blank=True)
     title_en = models.CharField(max_length=255, null=True, blank=True)
+    category = models.ForeignKey(
+        TeamCategory, on_delete=models.CASCADE, null=True)
     technalogies = models.ManyToManyField(Technology)
     image = models.ImageField(upload_to="team/")
     order = models.IntegerField(default=99)
@@ -316,4 +329,3 @@ class FormContent(models.Model):
 
     def __str__(self):
         return self.title_uz
- 

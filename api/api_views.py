@@ -114,7 +114,7 @@ def portifolioView(request, lng):
         else:
             portifolio = Portifolio.objects.filter(
                 is_active=True, category_id=category).order_by('order')
-        
+
         if is_show_main is not None:
             portifolio = portifolio.filter(is_show_main=True)
 
@@ -147,7 +147,7 @@ def aboutPageView(request, lng):
         aboutUsStatistics = MainAboutUsStatistic.objects.filter(is_active=True)[
             0:4]
         services = Service.objects.filter(is_active=True).order_by("order")
-        team = Team.objects.filter(is_active=True).order_by('order')
+        team = TeamCategory.objects.filter(is_active=True).order_by('order')
         industrytitle = IndustryTitle.objects.filter(is_active=True).last()
         industry = Industry.objects.filter(is_active=True)[0:4]
         if lng == "ru":
@@ -155,7 +155,7 @@ def aboutPageView(request, lng):
                 "aboutUs": AboutUsTitleSerializerRu(aboutUs).data,
                 "aboutUsStatistics": MainAboutUsStatisticSerializerRu(aboutUsStatistics, many=True).data,
                 "services": ServiceSerializerRu(services, many=True).data,
-                "team": TeamSerializerRu(team, many=True).data,
+                "team": TeamCategorySerializerRu(team, many=True).data,
                 "industryTitle": IndustryTitleSerializerRu(industrytitle).data,
                 "industry": IndustrySerializerRu(industry, many=True).data,
             }
@@ -164,7 +164,7 @@ def aboutPageView(request, lng):
                 "aboutUs": AboutUsTitleSerializerEn(aboutUs).data,
                 "aboutUsStatistics": MainAboutUsStatisticSerializerEn(aboutUsStatistics, many=True).data,
                 "services": ServiceSerializerEn(services, many=True).data,
-                "team": TeamSerializerEn(team, many=True).data,
+                "team": TeamCategorySerializerEn(team, many=True).data,
                 "industryTitle": IndustryTitleSerializerEn(industrytitle).data,
                 "industry": IndustrySerializerEn(industry, many=True).data,
             }
@@ -173,7 +173,7 @@ def aboutPageView(request, lng):
                 "aboutUs": AboutUsTitleSerializerUz(aboutUs).data,
                 "aboutUsStatistics": MainAboutUsStatisticSerializerUz(aboutUsStatistics, many=True).data,
                 "services": ServiceSerializerUz(services, many=True).data,
-                "team": TeamSerializerUz(team, many=True).data,
+                "team": TeamCategorySerializerUz(team, many=True).data,
                 "industryTitle": IndustryTitleSerializerUz(industrytitle).data,
                 "industry": IndustrySerializerUz(industry, many=True).data,
             }

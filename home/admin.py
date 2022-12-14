@@ -99,6 +99,11 @@ class TeamAdmin(admin.ModelAdmin):
     list_display = ['name_uz', 'title_uz', 'image', 'order', 'is_active']
 
 
+@admin.register(TeamCategory)
+class TeamCategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title_uz', 'order', 'is_active']
+
+
 @admin.register(IndustryTitle)
 class IndustryTitleAdmin(admin.ModelAdmin):
     list_display = ['title_uz', 'text_uz']

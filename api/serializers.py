@@ -323,6 +323,54 @@ class TeamSerializerEn(serializers.ModelSerializer):
                   'technalogies', 'image', 'order']
 
 
+class TeamCategorySerializerUz(serializers.ModelSerializer):
+    team = serializers.SerializerMethodField()
+
+    class Meta:
+        model = TeamCategory
+        fields = ['id', 'title_uz', 'team']
+
+    def get_team(self, obj):
+        try:
+            team = Team.objects.filter(
+                is_active=True, category=obj).order_by('order')
+            return TeamSerializerUz(team, many=True).data
+        except:
+            return []
+
+
+class TeamCategorySerializerRu(serializers.ModelSerializer):
+    team = serializers.SerializerMethodField()
+
+    class Meta:
+        model = TeamCategory
+        fields = ['id', 'title_ru', 'team']
+
+    def get_team(self, obj):
+        try:
+            team = Team.objects.filter(
+                is_active=True, category=obj).order_by('order')
+            return TeamSerializerRu(team, many=True).data
+        except:
+            return []
+
+
+class TeamCategorySerializerEn(serializers.ModelSerializer):
+    team = serializers.SerializerMethodField()
+
+    class Meta:
+        model = TeamCategory
+        fields = ['id', 'title_en', 'team']
+
+    def get_team(self, obj):
+        try:
+            team = Team.objects.filter(
+                is_active=True, category=obj).order_by('order')
+            return TeamSerializerEn(team, many=True).data
+        except:
+            return []
+
+
 class IndustryTitleSerializerUz(serializers.ModelSerializer):
     class Meta:
         model = IndustryTitle
